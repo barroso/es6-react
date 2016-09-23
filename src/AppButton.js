@@ -8,10 +8,10 @@ class AppButton extends React.Component {
 
 class Button extends React.Component {
   render(){
-    return <button>{this.props.children}</button>
+    return <button className="btn btn-default">{this.props.children}</button>
   }
 }
 
-const Heart = () => <span className="glyphicon glyphicon-hear"></span>
+const Heart = () => <span className="glyphicon glyphicon-heart"></span>
 
 export default AppButton
