@@ -38,31 +38,62 @@ const styleButton = {
   height: 48
 };
 
+const styleButtonLabel = {
+  fontSize: 16,
+  letterSpacing: 1,
+  color: '#FFF',
+  textTransform: 'capitalize'
+};
+
+
 injectTapEventPlugin();
 
-const ListExampleMessages = () => (
-  <MuiThemeProvider>
-      <div style={boxStyle} className="jumbotron">
-        <h4 style={titleStyle}>Selecione o Licenciado</h4>
-        <div style={listStyle}>
-          <List>
-            <ListItem primaryText="Empresa 01"/>
-            <Divider/>
-            <ListItem primaryText="Empresa 02"/>
-            <Divider/>
-            <ListItem primaryText="Empresa 03"/>
-            <Divider/>
-            <ListItem primaryText="Empresa 04"/>
-            <Divider/>
-            <ListItem primaryText="Empresa 05"/>
-            <Divider/>
-            <ListItem primaryText="Empresa 06"/>
-          </List>
-        </div>
-        <RaisedButton label="Selecionar" style={styleButton} backgroundColor="#103b61" labelStyle={{color: '#FFF'}}/>
-      </div>
+class ListExampleMessages extends React.Component {
 
-  </MuiThemeProvider>
-);
+  render() {
+    const Title = () => <h4 style={titleStyle}>{this.props.title}</h4>
+    const items = this.props.items.map(function (value) {
+      return <Item key={value}>{value}</Item>;
+    });
+
+    return (
+      <MuiThemeProvider>
+        <div style={boxStyle} className="jumbotron">
+          <Title/>
+          <div style={listStyle}>
+            <List>
+              {items}
+            </List>
+          </div>
+          <Button>Selecionar</Button>
+        </div>
+      </MuiThemeProvider>
+    )
+  }
+}
+
+class Item extends React.Component {
+  render() {
+    return (
+      <div>
+        <ListItem primaryText={this.props.children}/>
+        <Divider/>
+      </div>
+    )
+  }
+}
+
+class Button extends React.Component {
+  render() {
+    return (
+      <RaisedButton
+        label={this.props.children}
+        style={styleButton}
+        backgroundColor="#103b61"
+        labelStyle={styleButtonLabel}/>
+    )
+  }
+}
+
 
 export default ListExampleMessages;
